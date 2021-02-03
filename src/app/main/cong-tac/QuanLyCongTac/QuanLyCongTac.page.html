@@ -1,0 +1,118 @@
+<ion-header>
+   <div class="content-app-desktop">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="app/main/home"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Duyệt đăng ký</ion-title>
+      <ion-buttons slot="end">
+        <ion-button color="dark" href="app/main/announcement">
+          <span class="fa fa-bell" style="font-size: 25px; color: #606060;"></span>
+          <span *ngIf="totalUnred > 0 && greaterThan(totalUnred,9)" class="totalUnred">{{totalUnred}}</span> 
+          <span *ngIf="totalUnred >= 10 && greaterThan(totalUnred,99)" class="totalUnred greater10">{{totalUnred}}</span> 
+          <span *ngIf="totalUnred > 99" class="totalUnred greater99">99+</span> 
+        </ion-button>        
+      </ion-buttons>
+    </ion-toolbar>
+   </div>
+  </ion-header>
+
+  
+<ion-content padding>
+     <div class="content-app-desktop">
+      <form #f="ngForm" (ngSubmit)="onCreateOrEdit(f)">
+        <div class="group-from">
+          <ion-list>
+            <ion-item>
+              <p><span class="font-bold">Họ và tên: </span>{{hrWorkTimeDto.hoVaTen}}</p>
+            </ion-item>
+          <ion-item>
+            <p><span class="font-bold">Loại chứng từ: </span>
+              <span *ngIf="hrWorkTimeDto && hrWorkTimeDto.documentType === 'NP'">Đăng ký Nghỉ phép</span>
+              <span *ngIf="hrWorkTimeDto && hrWorkTimeDto.documentType === 'CT'">Đăng ký Công tác</span>
+              <span *ngIf="hrWorkTimeDto && hrWorkTimeDto.documentType === 'TC'">Đăng ký Tăng ca</span>
+              <span *ngIf="hrWorkTimeDto && hrWorkTimeDto.documentType === 'QCC'">Đăng ký Quên chấm công</span>
+            </p>
+          </ion-item>
+          <ng-container *ngIf="hrWorkTimeDto.documentType == 'NP'">
+            <ion-item>
+              <p><span class="font-bold">Loại nghỉ phép: </span>
+              <span *ngIf="hrWorkTimeDto.loaiNghiPhep == 'NGHIPHEPNAM'; else loaiNghiPhep_kethon">Nghỉ phép năm</span>
+              <ng-template #loaiNghiPhep_kethon>
+                  <ng-container *ngIf="hrWorkTimeDto.loaiNghiPhep == 'KETHON'; else loaiNghiPhep_tangche">
+                      Kết hôn
+                  </ng-container>
+                  <ng-template #loaiNghiPhep_tangche>
+                    <ng-container *ngIf="hrWorkTimeDto.loaiNghiPhep == 'TANGCHE'; else loaiNghiPhep_khongluong">
+                      Tang chế
+                    </ng-container>
+                      <ng-template #loaiNghiPhep_khongluong>
+                        <ng-container *ngIf="hrWorkTimeDto.loaiNghiPhep == 'KHONGLUONG'; else loaiNghiPhep_thaisan">
+                          Nghỉ không lương
+                        </ng-container>
+                        <ng-template #loaiNghiPhep_thaisan>
+                          <ng-container *ngIf="hrWorkTimeDto.loaiNghiPhep == 'THAISAN'; else loaiNghiPhep_omdau">
+                            Thai sản
+                          </ng-container>
+                          <ng-template #loaiNghiPhep_omdau>
+                            Ốm đau, bệnh tật
+                          </ng-template>
+                        </ng-template>
+                      </ng-template>
+                  </ng-template>
+              </ng-template>
+              </p>
+            </ion-item>
+          </ng-container>
+          <ion-item>
+            <p class="text-pre-line"><span class="font-bold">Lý do: </span>{{hrWorkTimeDto.reasons}}</p>
+          </ion-item>
+        <ion-item>
+          <p><span class="font-bold">Thời gian bắt đầu: </span> 
+            <span *ngIf="hrWorkTimeDto && hrWorkTimeDto.timeFromMoment && hrWorkTimeDto.timeFromMoment.includes('00:00'); else other_timeFrom">{{hrWorkTimeDto.timeFromMoment.replace('00:00','')}}</span>
+            <ng-template #other_timeFrom><span>{{hrWorkTimeDto.timeFromMoment}}</span></ng-template>
+          </p>
+        </ion-item>
+         <ion-item>
+          <p><span class="font-bold">Thời gian kết thúc: </span> 
+            <span *ngIf="hrWorkTimeDto && hrWorkTimeDto.timeToMoment && hrWorkTimeDto.timeToMoment.includes('00:00'); else other_timeTo">{{hrWorkTimeDto.timeToMoment.replace('00:00','')}}</span>
+            <ng-template #other_timeTo><span>{{hrWorkTimeDto.timeToMoment}}</span></ng-template>
+          </p>
+         </ion-item>
+         <ion-item *ngIf="hrWorkTimeDto && hrWorkTimeDto.attachment && hrWorkTimeDto.attachment.length > 0">
+          <ion-img src="{{globalUrlAPI + hrWorkTimeDto.attachment}}"></ion-img>
+         </ion-item>
+         <ion-item>
+          <ion-checkbox style="margin-right: 10px;" id="isReceive" class="isReceive" color="primary" [(ngModel)]="isReceive" name="isReceive">
+          </ion-checkbox>
+          <ion-label style="display: inline-block;">Duyệt đơn</ion-label>
+        </ion-item>
+        <div class="group-from" *ngIf="!isReceive; else ohter_receive" style="padding-top: 8px;">
+          <ion-row>
+            <ion-col style="padding-left: 18px;">
+             <p class="label-denies">Lý do từ chối: </p>
+             <ion-textarea maxlength="100" type="text" rows="3" ngModel name="denies" [(ngModel)]="denies"
+               style="border: 1px solid lightgray;border-radius: 10px;padding: 0 10px;" placeholder="Nhập lý do từ chối" required>
+             </ion-textarea>
+            </ion-col>
+          </ion-row>
+       </div>
+       <ng-template #ohter_receive>
+            <ion-row>
+              <ion-col>
+                <input type="hidden" name="">
+              </ion-col>
+            </ion-row>
+       </ng-template>
+          </ion-list>
+          </div>
+            <div class="group-from">
+                <ion-row>
+                  <ion-col>
+                    <ion-button expand="block" type="submit" block [disabled]="!f.valid">Xác nhận</ion-button>
+                  </ion-col>
+                </ion-row>
+            </div>
+      </form>
+     </div>
+  </ion-content>

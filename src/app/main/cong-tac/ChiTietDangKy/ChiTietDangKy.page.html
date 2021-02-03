@@ -1,0 +1,117 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="app/main/home"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Thông tin đăng ký</ion-title>
+      <ion-buttons slot="end">
+        <ion-button color="dark" href="app/main/announcement">
+          <span class="fa fa-bell" style="font-size: 25px; color: #606060;"></span>
+          <span *ngIf="totalUnred > 0 && greaterThan(totalUnred,9)" class="totalUnred">{{totalUnred}}</span> 
+          <span *ngIf="totalUnred >= 10 && greaterThan(totalUnred,99)" class="totalUnred greater10">{{totalUnred}}</span> 
+          <span *ngIf="totalUnred > 99" class="totalUnred greater99">99+</span> 
+        </ion-button>        
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  
+<ion-content padding>
+        <div class="group-from" *ngIf="hrWorkTimeDto">
+          <ion-list>
+            <ion-item>
+              <p><span class="font-bold">Họ và tên: </span>{{hrWorkTimeDto.hoVaTen}}</p>
+            </ion-item>
+          <ion-item>
+            <p><span class="font-bold">Loại chứng từ: </span>
+              <span *ngIf="hrWorkTimeDto && hrWorkTimeDto.documentType === 'NP'">Đăng ký Nghỉ phép</span>
+              <span *ngIf="hrWorkTimeDto && hrWorkTimeDto.documentType === 'CT'">Đăng ký Công tác</span>
+              <span *ngIf="hrWorkTimeDto && hrWorkTimeDto.documentType === 'TC'">Đăng ký Tăng ca</span>
+              <span *ngIf="hrWorkTimeDto && hrWorkTimeDto.documentType === 'QCC'">Đăng ký Quên chấm công</span>
+            </p>
+          </ion-item>
+          <ion-item>
+            <p><span class="font-bold">Ngày tạo đơn: </span> 
+              <span>{{hrWorkTimeDto.creationTime.clone().format('HH:mm DD/MM/YYYY')}}</span>
+            </p>
+           </ion-item>
+           <ion-item>
+            <p class="text-pre-line"><span class="font-bold">Lý do: </span>{{hrWorkTimeDto.reasons}}</p>
+          </ion-item>
+          <ion-item>
+            <p><span class="font-bold">Trạng thái: </span>
+            <span *ngIf="hrWorkTimeDto.approverId == null; else other_status">Đang chờ duyệt</span>
+            <ng-template #other_status>
+                <ng-container *ngIf="hrWorkTimeDto.status === 0; else finish_approve">
+                    Đang trong quá trình duyệt
+                </ng-container>
+                <ng-template #finish_approve>
+                    <ng-container *ngIf="hrWorkTimeDto.status === 1; else cancel_approve">
+                        Đã được duyệt
+                    </ng-container>
+                    <ng-template #cancel_approve>
+                        Đã bị từ chối
+                    </ng-template>
+                </ng-template>
+            </ng-template>
+            </p>
+          </ion-item>
+          <ng-container *ngIf="hrWorkTimeDto.documentType == 'NP'">
+            <ion-item>
+              <p><span class="font-bold">Loại nghỉ phép: </span>
+              <span *ngIf="hrWorkTimeDto.loaiNghiPhep == 'NGHIPHEPNAM'; else loaiNghiPhep_kethon">Nghỉ phép năm</span>
+              <ng-template #loaiNghiPhep_kethon>
+                  <ng-container *ngIf="hrWorkTimeDto.loaiNghiPhep == 'KETHON'; else loaiNghiPhep_tangche">
+                      Kết hôn
+                  </ng-container>
+                  <ng-template #loaiNghiPhep_tangche>
+                    <ng-container *ngIf="hrWorkTimeDto.loaiNghiPhep == 'TANGCHE'; else loaiNghiPhep_khongluong">
+                      Tang chế
+                    </ng-container>
+                      <ng-template #loaiNghiPhep_khongluong>
+                        <ng-container *ngIf="hrWorkTimeDto.loaiNghiPhep == 'KHONGLUONG'; else loaiNghiPhep_thaisan">
+                          Nghỉ không lương
+                        </ng-container>
+                        <ng-template #loaiNghiPhep_thaisan>
+                          <ng-container *ngIf="hrWorkTimeDto.loaiNghiPhep == 'THAISAN'; else loaiNghiPhep_omdau">
+                            Thai sản
+                          </ng-container>
+                          <ng-template #loaiNghiPhep_omdau>
+                            Ốm đau, bệnh tật
+                          </ng-template>
+                        </ng-template>
+                      </ng-template>
+                  </ng-template>
+              </ng-template>
+              </p>
+            </ion-item>
+          </ng-container>
+        <ng-container *ngIf="hrWorkTimeDto.status === 2">
+          <ion-item>
+            <p class="text-pre-line"> <span class="font-bold">Lý do bị từ chối: </span> {{hrWorkTimeDto.notes}}</p>
+          </ion-item>
+        </ng-container>
+        
+        <ion-item>
+          <p><span class="font-bold">Thời gian bắt đầu: </span> 
+            <span *ngIf="hrWorkTimeDto && hrWorkTimeDto.timeFrom && hrWorkTimeDto.timeFrom.clone().format('HH:mm DD/MM/YYYY').includes('00:00'); else other_timeFrom">{{hrWorkTimeDto.timeFrom.clone().format('HH:mm DD/MM/YYYY').replace('00:00','')}}</span>
+            <ng-template #other_timeFrom><span>{{hrWorkTimeDto.timeFrom.clone().format('HH:mm DD/MM/YYYY')}}</span></ng-template>
+          </p>
+        </ion-item>
+         <ion-item>
+          <p><span class="font-bold">Thời gian kết thúc: </span> 
+            <span *ngIf="hrWorkTimeDto && hrWorkTimeDto.timeTo && hrWorkTimeDto.timeTo.clone().format('HH:mm DD/MM/YYYY').includes('00:00'); else other_timeTo">{{hrWorkTimeDto.timeTo.clone().format('HH:mm DD/MM/YYYY').replace('00:00','')}}</span>
+            <ng-template #other_timeTo><span>{{hrWorkTimeDto.timeTo.clone().format('HH:mm DD/MM/YYYY')}}</span></ng-template>
+          </p>
+         </ion-item>
+          <ng-container *ngIf="hrWorkTimeDto && hrWorkTimeDto.attachment && hrWorkTimeDto.attachment.length > 0">
+            <div class="thumb-img">
+              <p style="font-size: 17px;">Hình ảnh chứng minh</p>
+             <p>
+              <img src="{{globalUrlAPI + hrWorkTimeDto.attachment}}" tappable (click)="openPreview(hrWorkTimeDto.attachment)">
+             </p>
+            </div>
+             </ng-container>        
+          </ion-list>
+          </div>
+  </ion-content>

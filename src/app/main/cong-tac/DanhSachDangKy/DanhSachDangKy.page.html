@@ -1,0 +1,74 @@
+<ion-header>
+   <div class="content-app-desktop">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="app/main/home"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Danh sách đăng ký</ion-title>
+      <ion-buttons slot="end">
+        <ion-button color="dark" href="app/main/announcement">
+          <span class="fa fa-bell" style="font-size: 25px; color: #606060;"></span>
+          <span *ngIf="totalUnred > 0 && greaterThan(totalUnred,9)" class="totalUnred">{{totalUnred}}</span> 
+          <span *ngIf="totalUnred >= 10 && greaterThan(totalUnred,99)" class="totalUnred greater10">{{totalUnred}}</span> 
+          <span *ngIf="totalUnred > 99" class="totalUnred greater99">99+</span> 
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+   </div>
+  </ion-header>
+  
+  <ion-content padding>
+    <div class="content-app-desktop">
+      
+      <div *ngIf="hrWorkTimeDto && hrWorkTimeDto.length == 0">
+        <p class="none-margin">Không có đơn đăng ký</p>
+      </div>
+
+      <ion-list>
+        <ion-card *ngFor="let item of hrWorkTimeDto; let i = index" style="margin:10px 0px; background:#edeef3;border:1px solid lightgray">
+          <ion-card-content style="padding: 0px 10px;" > 
+            <ion-row>
+              <ion-col>
+                <div class="box-contain-content fl-left"  (click)="viewDetail(item.id)">
+                  <p>
+                      <p class="document-type">Loại chứng từ: 
+                        <span class="content-name" *ngIf="item.documentType == 'NP'">Đăng ký Nghỉ phép</span>
+                        <span class="content-name" *ngIf="item.documentType == 'CT'">Đăng ký Công tác</span>
+                        <span class="content-name" *ngIf="item.documentType == 'TC'">Đăng ký Tăng ca</span>
+                        <span class="content-name" *ngIf="item.documentType == 'QCC'">Đăng ký Quên chấm công</span>
+                      </p>
+                      <p class="content-name my-reasons"><span>Lý do: </span>{{item.reasons}}</p>
+                    <p class="content-date"><span>Thời gian bắt đầu: </span> 
+                      <span *ngIf="item.timeFrom.includes('00:00'); else other_timeFrom">{{item.timeFrom.replace('00:00','')}}</span>
+                      <ng-template #other_timeFrom><span>{{item.timeFrom}}</span></ng-template></p>
+                    <p class="content-date"><span class="font-bold">Thời gian kết thúc: </span> 
+                      <span *ngIf="item.timeTo.includes('00:00'); else other_timeTo">{{item.timeTo.replace('00:00','')}}</span>
+                      <ng-template #other_timeTo><span>{{item.timeTo}}</span></ng-template></p>
+                </div>
+                <ng-container *ngIf="item.approverId === null; else disabled_btn">
+                  <div class="box-contain-btn fl-left" >
+                    <button (click)="edit(item.id);" class="btn-xem btn-dsct">Sửa</button>
+                    <button (click)="questionDelete(item.id);" class="btn-xoa btn-dsct">Xóa</button>
+                </div>
+                </ng-container>
+               
+                <ng-template #disabled_btn>
+                  <div class="box-contain-btn fl-left" >
+                  <button class="btn-xem btn-dsct" disabled>Sửa</button>
+                    <button class="btn-xoa btn-dsct" disabled>Xóa</button>
+                    </div>
+                </ng-template>
+              </ion-col>
+            </ion-row>
+          </ion-card-content> 
+        </ion-card>
+      </ion-list>
+
+      <ion-infinite-scroll *ngIf="hrWorkTimeDto && hrWorkTimeDto.length > 0" threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="Đang tải thêm dữ liệu...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </ion-content>

@@ -1,0 +1,132 @@
+<ion-header>
+  <div class="content-app-desktop">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button (click)="backToHome()"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Thông tin chấm công</ion-title>
+      <ion-buttons slot="end">
+        <ion-button color="dark" href="app/main/announcement">
+          <span class="fa fa-bell" style="font-size: 25px; color: #606060;"></span>
+          <span *ngIf="totalUnred > 0 && greaterThan(totalUnred,9)" class="totalUnred">{{totalUnred}}</span> 
+          <span *ngIf="totalUnred >= 10 && greaterThan(totalUnred,99)" class="totalUnred greater10">{{totalUnred}}</span> 
+          <span *ngIf="totalUnred > 99" class="totalUnred greater99">99+</span> 
+        </ion-button>        
+      </ion-buttons>
+    </ion-toolbar>
+  </div>
+  </ion-header>
+  
+  <ion-content padding>
+    <div class="content-app-desktop">
+      <form #f="ngForm" (ngSubmit)="filterProcessDate(f)">
+        <div *ngIf="branchType == 'NV'; else other_content">
+          <ion-row>
+            <section style="width: 100%">
+              <ion-label style="font-size: 0.9em;">
+                Ngày đã chọn : {{ dateFrom.format('DD/MM/yyyy') }} đến {{ dateTo.format('DD/MM/yyyy')}}
+              </ion-label>
+              <div class="clearfix">
+                <div style="width: 50%; float:left;">
+                  <ion-button size="small" mwPreventDoubleClick (throttledClick)="openCalendar()">
+                    Chọn ngày lọc tại đây
+                  </ion-button>
+                </div>
+               <div style="width: 50%; float:left; text-align: right;">
+                <ion-button size="small" *ngIf="showBtnRefresh" (click)="refresh()" style="--background:linear-gradient(to right, #00cc99 0%, #006666e8 100%)"><i class="fa fa-refresh"></i></ion-button>
+                <ion-button disabled size="small" *ngIf="!showBtnRefresh" (click)="refresh()" style="--background:linear-gradient(to right, #00cc99 0%, #006666e8 100%)"><i class="fa fa-refresh"></i></ion-button>
+                <ion-button  size="small" type="submit" style="--background:linear-gradient(to right, #ffcc00 0%, #ff6600c7 101%)"><i class="fa fa-filter"></i></ion-button>
+              </div>
+              </div>
+            </section>
+        </ion-row>
+        </div>
+        <ng-template #other_content>
+          <ion-row>
+              <section style="width: 100%">
+                <ion-label style="font-size: 0.9em;">
+                  Ngày đã chọn : {{ dateFrom.format('DD/MM/yyyy') }} đến {{ dateTo.format('DD/MM/yyyy')}}
+                </ion-label>
+                <div class="clearfix">
+                  <div style="width: 50%; float:left;">
+                    <ion-button size="small" mwPreventDoubleClick (throttledClick)="openCalendar()">
+                      Chọn ngày lọc tại đây
+                    </ion-button>
+                  </div>
+                 <div style="width: 50%; float:left; text-align: right;">
+                  <ion-button size="small" *ngIf="showBtnRefresh" (click)="refresh()" style="--background:linear-gradient(to right, #00cc99 0%, #006666e8 100%)"><i class="fa fa-refresh"></i></ion-button>
+                  <ion-button disabled size="small" *ngIf="!showBtnRefresh" (click)="refresh()" style="--background:linear-gradient(to right, #00cc99 0%, #006666e8 100%)"><i class="fa fa-refresh"></i></ion-button>
+                  <ion-button  size="small" type="submit" style="--background:linear-gradient(to right, #ffcc00 0%, #ff6600c7 101%)"><i class="fa fa-filter"></i></ion-button>
+                
+                </div>
+                </div>
+              </section>
+          </ion-row>
+          <ion-row>
+            <ion-col> 
+              <ion-label position="stacked" style="margin-bottom: 5px;"> Chọn kiểu lọc:</ion-label>
+              <div class="type-filter">
+                  <ion-select class="custom-options" interface="popover" [(ngModel)]="typeGlobal" name="typeGlobal">
+                    <ion-select-option value="individual">Cá nhân</ion-select-option>
+                    <ion-select-option value="all" class="brown-option">Tất cả</ion-select-option>
+                  </ion-select>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="typeGlobal == 'all'">
+            <ion-col> 
+              <div>
+                  <ion-label position="stacked" style="margin-bottom: 5px;"> Thông tin nhân viên:</ion-label>
+                  <div class="hovaten">
+                    <div *ngIf="isItemAvailable">
+                        <div id="autocomplete_holder">
+                          <div id="autocomplete">
+                            <li *ngFor="let item of items" class="autocomplete_li" (click)="sendValueHovaten(item)">{{ item }}</li>
+                          </div>
+                        </div>
+                    </div>
+                      <ion-searchbar value="{{search}}"  name="search" style="padding-top: 0px; height: 40px; padding-bottom: 0px" type="text" debounce="500" (ionChange)="getItems($event)"></ion-searchbar>
+                  </div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ng-template>
+     
+    </form>
+    <div *ngIf="groupList && groupList.length > 0;else elsecontent">
+      <ion-card *ngFor="let item of groupList" style="margin:10px 0px; background:#f5f8fd;border:1px solid lightgray">
+        <ion-item *ngIf="flagGlobal">
+          <ion-label style="font-size: 15px; margin: 0px;" color="primary"> {{item.hoVaTen}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon style="font-size: 24px;" name="calendar" color="primary"></ion-icon>
+          <ion-label color="primary" style="text-transform: capitalize; font-size: 15px;">{{item.processDateFormat}}</ion-label>
+        </ion-item>
+        <ion-card-content style="color: #3880ff;padding:0 10px">
+          <ion-row>
+            <ion-col col-6> 
+              <p style="margin: 0px;
+              font-size: 13px; margin-bottom: 4px;" >CHECK IN</p>
+              <div class="info-check"><p style="margin: 0px;
+                font-size: 13px;">{{item.checkIn}}</p></div>
+            </ion-col>
+            <ion-col col-6>
+              <p style="margin: 0px;
+              font-size: 13px; margin-bottom: 4px;" >CHECK OUT</p>
+              <div class="info-check">
+                <p style="margin: 0px;
+                font-size: 13px;" *ngIf="item.checkOut != null">{{item.checkOut}}</p>
+                <p style="margin: 0px;
+                font-size: 13px;" *ngIf="item.checkOut == null">Không có dữ liệu</p>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <ng-template #elsecontent>
+      <p>Không tìm thấy dữ liệu</p>
+    </ng-template>
+    </div>
+  </ion-content>
+  

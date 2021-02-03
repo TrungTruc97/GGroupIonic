@@ -1,0 +1,39 @@
+.font-bold{
+    font-weight: bold;
+}
+.label-denies{
+    margin: 0px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.totalUnred{
+    display: inline-block;
+    position: relative;
+    background: #5188e8;
+    border-radius: 50%;
+    right: 12px;
+    font-size: 9px;
+    top: 3px;
+    color: #fff;
+    padding: 3px 6px;
+}
+.totalUnred.greater99{
+    padding: 5px 3px;
+}
+.totalUnred.greater10{
+    padding: 4px;
+}
+@media screen and (min-width: 768px){
+    .content-app-desktop{
+        width: 375px;
+        margin: 0px auto;
+    }
+    .content-app-desktop{
+        width: 375px;
+        margin: 0px auto;
+    }
+}
+
+p.text-pre-line {
+    white-space: pre-line;
+    }

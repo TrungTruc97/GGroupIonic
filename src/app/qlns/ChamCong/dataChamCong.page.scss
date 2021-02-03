@@ -1,0 +1,93 @@
+.box-datetime{
+        position: relative;
+        border-radius: 5px;
+    }
+.caret-down-datetime{
+        position: absolute;
+        top: 8px;
+        right: 36px;
+    }
+:host(.in-item) {
+        position: static;
+        max-width: 55%;
+    }
+#autocomplete{
+        position: absolute;
+        z-index: 1000;
+        background: #fff;
+        width: calc(100% - 20px);
+        top: 40px;
+        left: 10px;
+        max-height: 175px;
+        overflow-y: auto;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+    }
+.hovaten{
+        position: relative;
+    }
+.autocomplete_li{
+        list-style-type: none;
+        padding: 8px 20px;
+        border-bottom: 1px solid #eee;
+    }
+.mr-10{
+    display: inline-block;
+    margin-right: 10px;
+}
+.type-filter{
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+.box-datetime{
+    padding: 11px 6px 8px 8px;
+}
+.box-datetime::after{
+    font-family: fontAwesome;
+    content: "\f0dd";
+    font-size: 15px;
+    display: inline-block;
+    position: absolute;
+    top: 18px;
+    color: #989797;
+    right: 17px;
+}
+.clearfix{
+overflow: auto;
+}
+.info-check{
+    text-align: center;
+    width: 80%;
+    font-weight: bold;
+    color: #3880ff;
+    border: 1px dotted #3880ff;
+    padding: 2px;
+    font-style: italic;
+    border-radius: 4px;
+}
+.totalUnred{
+    display: inline-block;
+    position: relative;
+    background: #5188e8;
+    border-radius: 50%;
+    right: 12px;
+    font-size: 9px;
+    top: 3px;
+    color: #fff;
+    padding: 3px 6px;
+}
+.totalUnred.greater99{
+    padding: 5px 3px;
+}
+.totalUnred.greater10{
+    padding: 4px;
+}
+@media screen and (min-width: 768px){
+    .content-app-desktop{
+        width: 375px;
+        margin: 0px auto;
+    }
+    .content-app-desktop{
+        width: 375px;
+        margin: 0px auto;
+    }
+}

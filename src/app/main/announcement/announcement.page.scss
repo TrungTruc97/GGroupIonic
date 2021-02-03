@@ -1,0 +1,118 @@
+.top-div{
+    position: relative;
+    padding-top: 13px;
+    .box-check-item{
+        display: inline-block;
+        position: absolute;
+        top: 4px;
+        left: 0px;
+    }
+    .box-contain-content{
+        width: calc(100% - 5px);
+        padding: 10px 0px 0px;
+        overflow: auto;
+        .thumb-img{
+            width: 45px;
+            border-radius: 2px;
+            overflow: hidden;
+            img{
+                width: 45px;
+                height: 42px;
+            }
+        }
+        .box-title-announcement{
+            width: calc(100% - 45px);
+            padding-left: 10px;
+            .title-announcement{
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+.fl-left{
+    float: left; 
+}
+.time-ago{
+    text-align: right;
+    padding: 3px;
+    width: 40%;
+}
+.select-all-label{
+    display: inline-block;
+    padding-left: 8px;
+    font-size: 13px;
+    line-height: 24px;
+}
+.btn-delete-all{
+  text-align: center;
+   padding: 5px 13px; 
+   color: #fff;
+    background-color: #0075ff; 
+   border-radius: 3px;
+}
+.btn-delete-all:disabled{
+    opacity: 0.6;
+}
+.btn{
+    font-style: italic;
+    text-decoration: underline;
+}
+.btn-xoa{
+    margin-left: 55px;
+}
+.btn-xem{
+    margin-left: 13px;
+}
+.ion-card-cus{
+    margin:10px 0px;
+    width: 100%; 
+}
+.has-read{
+    background-color: #f7f7f7;
+    border: 1px solid #f1efef;
+    .btn{
+        background: #f7f7f7;
+        color: rgb(101, 103, 107);
+    }
+    p, span{
+        color: rgb(101, 103, 107);
+    }
+}
+.has-not-read{
+    background-color: #f5f8fd;
+    border:1px solid lightgray;
+    .btn{
+        background: #f5f8fd;
+        color: #0075ff;
+    }
+    p, span{
+        color: #000;
+    }
+}
+.box-fixed{
+    padding-left: 16px;
+    overflow: auto;
+   // position: fixed;
+    display: block;
+    width: 100%;
+    height: auto;
+    z-index: 100000;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    top: 0px;
+    background: #fff;
+}
+@media screen and (min-width: 768px){
+    .content-app-desktop{
+        width: 375px;
+        margin: 0px auto;
+    }
+    .content-app-desktop{
+        width: 375px;
+        margin: 0px auto;
+    }
+    .box-fixed{
+        width: 375px;
+    }
+}

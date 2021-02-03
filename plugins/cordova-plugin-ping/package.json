@@ -1,0 +1,58 @@
+{
+  "_args": [
+    [
+      "cordova-plugin-ping@0.5.0",
+      "/Users/trucrocket/WorkSpace/ionic/GGroupInsightApp"
+    ]
+  ],
+  "_development": true,
+  "_from": "cordova-plugin-ping@0.5.0",
+  "_id": "cordova-plugin-ping@0.5.0",
+  "_inBundle": false,
+  "_integrity": "sha512-klcqRtmbwlD5WeeQHvsd6UI7/MsrSamNSPyVacQy0sTVNjHQPW74Dsn/wWIHadbwnn9JMS4xA7o306P15AjIFg==",
+  "_location": "/cordova-plugin-ping",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "cordova-plugin-ping@0.5.0",
+    "name": "cordova-plugin-ping",
+    "escapedName": "cordova-plugin-ping",
+    "rawSpec": "0.5.0",
+    "saveSpec": null,
+    "fetchSpec": "0.5.0"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-ping/-/cordova-plugin-ping-0.5.0.tgz",
+  "_spec": "0.5.0",
+  "_where": "/Users/trucrocket/WorkSpace/ionic/GGroupInsightApp",
+  "author": {
+    "name": "t1st3"
+  },
+  "bugs": {
+    "url": "https://github.com/t1st3/cordova-plugin-ping/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-ping",
+    "platforms": [
+      "android"
+    ]
+  },
+  "description": "Cordova Ping Plugin",
+  "homepage": "https://github.com/t1st3/cordova-plugin-ping#readme",
+  "keywords": [
+    "cordova",
+    "ping",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "license": "MIT",
+  "name": "cordova-plugin-ping",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/t1st3/cordova-plugin-ping.git"
+  },
+  "version": "0.5.0"
+}

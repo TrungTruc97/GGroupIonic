@@ -1,0 +1,87 @@
+<ion-header>
+    <div class="content-app-desktop">
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-back-button (click)="backToHome()"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Danh sách chờ duyệt</ion-title>
+        <ion-buttons slot="end">
+          <ion-button color="dark" href="app/main/announcement">
+            <span class="fa fa-bell" style="font-size: 25px; color: #606060;"></span>
+            <span *ngIf="totalUnred > 0 && greaterThan(totalUnred,9)" class="totalUnred">{{totalUnred}}</span> 
+            <span *ngIf="totalUnred >= 10 && greaterThan(totalUnred,99)" class="totalUnred greater10">{{totalUnred}}</span> 
+            <span *ngIf="totalUnred > 99" class="totalUnred greater99">99+</span> 
+          </ion-button>        
+        </ion-buttons>
+      </ion-toolbar>
+    </div>
+  </ion-header>
+  
+  <ion-content padding>
+    <div class="content-app-desktop">
+      <div *ngIf="checkList && checkList.length > 0;else elsecontent">
+        <ion-row >
+          <ion-col col-6>
+            <ion-item style="--padding-start: 0px;--border-width:0px;--inner-border-width:0px; margin-left: 11px;">
+             <input type="checkbox" id="checkboxAll" class="css-checkbox" [(ngModel)]="masterSelected" name="list_name" value="m1" (change)="checkUncheckAll()"/>
+             <label for="checkboxAll" class="css-label"><span>Chọn tất cả</span></label>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6 style="margin: 0px; padding: 0px;">
+            <ion-item style="--padding-start: 0px;--border-width:0px;--inner-border-width:0px; position: relative;">
+              <ng-container *ngIf="this.checkedList.length > 0;else not_choose_all">
+                <button class="btn-duyet-nhanh" (click)="revieceAll()">Duyệt</button>
+              </ng-container>
+              <ng-template #not_choose_all>
+                <button class="btn-duyet-nhanh" disabled>Duyệt</button>
+              </ng-template>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+      <ng-template #elsecontent>
+        <p class="none-margin">Không có đơn đăng ký</p>
+      </ng-template>
+
+      <ion-list>
+        <ion-card *ngFor="let item of checkList; let i = index" style="margin:10px 0px; background:#f5f8fd;border:1px solid lightgray">
+          <ion-card-content style="padding: 0px 10px;" > 
+            <ion-row>
+              <ion-col>
+                <div class="box-contain-content fl-left">
+                  <p class="content-name">
+                   <input type="checkbox" id="{{'checkboxG' + i}}" class="css-checkbox" [(ngModel)]="item.isSelected" name="list_name" 
+                    value="{{item.id}}" (change)="isAllSelected(i)" />
+                    <label for="{{'checkboxG' + i}}" class="css-label"></label>
+                    <span style="display: inline-block; margin-left: 5px;">{{item.hoVaTen}}</span></p>
+                      <p class="document-type">Loại chứng từ: 
+                        <span *ngIf="item.documentType == 'NP'">Đăng ký Nghỉ phép</span>
+                        <span *ngIf="item.documentType == 'CT'">Đăng ký Công tác</span>
+                        <span *ngIf="item.documentType == 'TC'">Đăng ký Tăng ca</span>
+                        <span *ngIf="item.documentType == 'QCC'">Đăng ký Quên chấm công</span>
+                      </p>
+                    <p class="content-date"><span>Thời gian bắt đầu: </span> 
+                      <span *ngIf="item.timeFrom.includes('00:00'); else other_timeFrom">{{item.timeFrom.replace('00:00','')}}</span>
+                      <ng-template #other_timeFrom><span>{{item.timeFrom}}</span></ng-template></p>
+                    <p class="content-date"><span class="font-bold">Thời gian kết thúc: </span> 
+                      <span *ngIf="item.timeTo.includes('00:00'); else other_timeTo">{{item.timeTo.replace('00:00','')}}</span>
+                      <ng-template #other_timeTo><span>{{item.timeTo}}</span></ng-template></p>
+                </div>
+                <div class="box-contain-btn fl-left">
+                  <button (click)="viewDetail(item.id);" class="btn-xem btn-dsct">Xem</button>
+                  <button (click)="duyetDon(item.id);" class="btn-duyet btn-dsct">Duyệt</button>
+              </div>
+              </ion-col>
+            </ion-row>
+          </ion-card-content> 
+        </ion-card>
+      </ion-list>
+
+      <ion-infinite-scroll *ngIf="checkList && checkList.length > 0" threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="Đang tải thêm dữ liệu...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+  </ion-content>

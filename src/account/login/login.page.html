@@ -1,0 +1,49 @@
+<ion-content>
+  <div class="login-content">
+      <div class="box-title">
+        <h2 class="title-login"><img src="assets\images\logogobrandingR.png" /></h2>
+        <span class="version-app">Version: 1.0</span>
+      </div>
+    <!-- <ion-label>Current tenant: {{tenantName != null ? tenantName : 'Not selected'}}</ion-label>
+  <ion-button shape="round" color="primary" fill="outline" (click)="changeTenant()" block >Change</ion-button> -->
+    <form #f="ngForm" (ngSubmit)="onLogin(f)">
+      <!-- <p>{{content.title}}</p> -->
+        <p class="about-login">Chào mừng bạn đến với GGroup</p>
+      <p class="des-login">Nhập thông tin dưới đây để đăng nhập</p>
+     <div class="group-from">
+      <ion-item style="background-color: #fff;border: 0px;--inner-border-width:0px;--min-height: 20px;">
+        <ion-label style="margin-right: 4px;
+        margin-bottom: 11px;"><span class="fa fa-user icon-input-login"></span>
+        </ion-label>
+        <ion-input class="input-login" maxlength="12" [(ngModel)]="username"
+          placeholder="Tên đăng nhập" type="email" ngModel name="username" required>
+        </ion-input>
+      </ion-item>
+     </div>
+  
+     <div class="group-from">
+      <ion-item style="background-color: #fff;border: 0px;--inner-border-width:0px;--min-height: 20px;">
+        <ion-label style="margin-right: 4px;
+        margin-bottom: 11px;"><span class="fa fa-lock icon-input-login" ></span>
+        </ion-label>
+        <ion-input class="input-login" maxlength="12" [(ngModel)]="password"
+          placeholder="Mật khẩu" [type]="showPassword ? 'text' : 'password'" clearOnEdit="false" ngModel name="password" required>
+        </ion-input>
+        <div style="background-color: #fff; padding: 3px;" (click)="onPasswordToggle()" ion-button clear small item-end icon-only>
+          <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+        </div>
+      </ion-item>
+     </div>
+     <div class="group-from">
+      <ion-item style="--padding-start: 0px;--inner-border-width:0px;--min-height: 20px;">
+        <ion-checkbox color="light" checked slot="start" name="rememberMe" [(ngModel)]="rememberMe" class="rememberMe" id="rememberMe"></ion-checkbox>
+        <ion-label color="light" >Nhớ mật khẩu</ion-label>
+      </ion-item>
+       </div>
+  
+      <!-- <ion-button (click)="googleSignIn()">Login with google</ion-button> -->
+      <ion-button color="danger" expand="block" type="submit" block
+        [disabled]="!f.valid"><b style="color:white;">Đăng nhập</b></ion-button>
+    </form>
+  </div>
+</ion-content>

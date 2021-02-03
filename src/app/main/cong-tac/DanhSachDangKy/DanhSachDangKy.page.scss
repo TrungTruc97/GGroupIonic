@@ -1,0 +1,97 @@
+.box-title-announcement{
+    float: left;
+    width: calc(100% - 40px);
+    padding-left: 3px;
+    font-size: 20px;
+    line-height: 21px;
+}
+.title-announcement{
+   // text-transform: capitalize;
+    font-size: 13px;
+    color: #3c3c3c;
+}
+.time-ago{
+    text-align: right;
+}
+.fl-left{
+    float: left;
+}
+.box-contain-content{
+    width: calc(100% - 75px);
+    color: #1383BA;
+    .content-name{
+        font-size: 13px;
+    }
+    .content-date{
+        font-size: 13px;
+    }
+}
+.box-contain-btn{
+    position: relative;
+    width: 75px;
+    height: 100%;
+    
+}
+.btn-dsct{
+    width: 100%;
+    background: #3880ff;
+    color: #fff;
+    font-size: 13px;
+    padding: 7px 14px;
+    border-radius: 3px;
+}
+.btn-xem{
+    position: absolute;
+    top: 5px;
+}
+.btn-xem:disabled{
+    opacity: 0.5;
+}
+.btn-xoa{
+    position: absolute;
+    bottom: 5px;
+    background-color: #ff242e;
+}
+.btn-xoa:disabled{
+    position: absolute;
+    bottom: 5px;
+    background-color: #ff242e;
+    opacity: 0.5;
+}
+.none-margin{
+    margin: 0px!important;
+}
+.totalUnred{
+    display: inline-block;
+    position: relative;
+    background: #5188e8;
+    border-radius: 50%;
+    right: 12px;
+    font-size: 9px;
+    top: 3px;
+    color: #fff;
+    padding: 3px 6px;
+}
+.totalUnred.greater99{
+    padding: 5px 3px;
+}
+.totalUnred.greater10{
+    padding: 4px;
+}
+.my-reasons{
+    height: 21px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre;
+}
+
+@media screen and (min-width: 768px){
+    .content-app-desktop{
+        width: 375px;
+        margin: 0px auto;
+    }
+    .content-app-desktop{
+        width: 375px;
+        margin: 0px auto;
+    }
+}

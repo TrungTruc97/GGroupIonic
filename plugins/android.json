@@ -1,0 +1,72 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "WebViewer": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-plugin-advanced-http": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-plugin-browsertab": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-plugin-camera": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-plugin-filepath": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-plugin-ionic-webview": {
+      "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+",
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-plugin-local-notification": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-plugin-networkinterface": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-plugin-ping": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "de.sitevertreiber.cordova.NetworkInterfaces": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-plugin-badge": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    }
+  }
+}

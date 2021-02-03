@@ -1,0 +1,80 @@
+<ion-header>
+ <div class="content-app-desktop">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="app/main/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Đăng ký chứng từ</ion-title>
+    <ion-buttons slot="end" style="display: none;">
+      <ion-button color="dark" href="app/main/announcement">
+      </ion-button>        
+    </ion-buttons>
+  </ion-toolbar>
+</div>
+</ion-header>
+
+<ion-content padding>
+ <div class="content-app-desktop">
+  <ng-container *ngIf="checkList && checkList.length > 0; else empty_checklist">
+    <div class="box-fixed">
+    <div style="float: left; width: 50%;">
+      <input type="checkbox" [(ngModel)]="masterSelected" name="list_name" value="m1" (change)="checkUncheckAll()"/> <span class="select-all-label">Chọn tất cả</span>
+    </div>
+    <div style="float: left; width: 50%; padding-right: 40px; text-align: right;">
+      <ng-container *ngIf="checkedList && checkedList.length > 0; else disabled_btn">
+        <button (click)="confirmDeleteAll()" class="btn-delete-all">Xóa</button>
+      </ng-container>
+      <ng-template #disabled_btn>
+        <button class="btn-delete-all" disabled>Xóa</button>
+      </ng-template>
+    </div>
+  </div>
+  </ng-container>
+  <ng-template #empty_checklist>
+    <p>Không có thông báo mới</p>
+  </ng-template>
+    <ion-list>
+        <ion-card class="ion-card-cus" *ngFor="let item of checkList">
+          <div [className]="item.hasRead ? 'has-read ' : 'has-not-read'">
+            <ion-card-content style="padding:0 10px">
+              <ion-row>
+                <ion-col>
+                  <div class="top-div">
+                    <div class="box-check-item">
+                      <input type="checkbox" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected()"/>
+                    </div>
+                    <div class="box-contain-content" (click)="viewDetail(item.entityId, item.id, item.hasRead)">
+                      <div class="thumb-img fl-left">
+                        <img *ngIf="item.image == '/uploads/defaultAvatar.png'" src="{{globalUrlAPI + '/' + item.image}}"
+                          alt="">
+                        <img *ngIf="item.image != '/uploads/defaultAvatar.png'" src="{{item.image}}" alt="">
+                      </div>
+                      <div class="box-title-announcement fl-left">
+                        <p class="title-announcement"> {{item.title}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="overflow: auto; width: 100%;">
+                    <div style="width: 60%;" class="fl-left">
+                      <button class="btn btn-xoa" (click)="ConfirmDelete(item.id)">Xóa</button>
+                      <button class="btn btn-xem" *ngIf="!item.statusType" (click)="viewQuanLy(item.entityId, item.id, item.hasRead);" >Xem</button>
+                    </div>
+                    <div class="time-ago fl-left">
+                      <p style="margin: 0px; font-size: 12px; color: #686666">{{item.dateCreated.fromNow()}}</p>
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </div>
+      </ion-card>
+    </ion-list>
+
+  <ion-infinite-scroll *ngIf="checkList && checkList.length > 0" threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Đang tải thêm dữ liệu...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+ </div>
+</ion-content>

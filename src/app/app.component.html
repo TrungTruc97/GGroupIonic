@@ -1,0 +1,39 @@
+<!-- <side-bar-menu></side-bar-menu> -->
+<ion-split-pane>
+    <ion-menu menuId="custom">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title class="navTitle">Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-menu-toggle  auto-hide="false">
+            <ion-item class="navMenu" contentId="menuContent" (click)="closeMenu()">
+              <ion-icon class="navIcon" slot="start" name="home"></ion-icon>
+              <ion-label class="navText">
+              Trang chủ
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" class="navMenu" contentId="menuContent">
+              <ion-icon class="navIcon" slot="start" [name]="p.icon"></ion-icon>
+              <ion-label class="navText">
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle  auto-hide="false">
+            <ion-item class="navMenu" contentId="menuContent" (click)="confirmLogout()">
+              <ion-icon class="navIcon" slot="start" name="exit"></ion-icon>
+              <ion-label class="navText">
+                Đăng xuất
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+<ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>

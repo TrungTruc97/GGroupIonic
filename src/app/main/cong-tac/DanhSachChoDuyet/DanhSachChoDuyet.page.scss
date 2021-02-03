@@ -1,0 +1,138 @@
+.box-title-announcement{
+    float: left;
+    width: calc(100% - 40px);
+    padding-left: 3px;
+    font-size: 20px;
+    line-height: 21px;
+}
+.title-announcement{
+   // text-transform: capitalize;
+    font-size: 13px;
+    color: #3c3c3c;
+}
+.time-ago{
+    text-align: right;
+}
+.fl-left{
+    float: left;
+}
+.box-contain-content{
+    width: calc(100% - 75px);
+    color: #1383BA;
+    .content-name{
+        font-size: 17px;
+        .icon-calendar{
+            font-size: 23px;
+            position: relative;
+            top: 5px;
+            margin-right: 5px;
+        }
+    }
+    .document-type{
+        font-size: 13px;
+    }
+    .content-date{
+        font-size: 12px;
+    }
+}
+.box-contain-btn{
+    position: relative;
+    width: 75px;
+    height: 100%;
+    
+}
+.btn-dsct{
+    width: 100%;
+    background: #3880ff;
+    color: #fff;
+    font-size: 13px;
+    padding: 7px 14px;
+    border-radius: 3px;
+}
+.btn-xem{
+    position: absolute;
+    top: 10px;
+}
+.btn-duyet{
+    position: absolute;
+    bottom: 10px;
+}
+.none-margin{
+    margin: 0px!important;
+}
+.btn-duyet-nhanh{
+    padding: 9px 14px;
+    background-color: #3880ff;
+    color: #fff;
+    position: absolute;
+    margin-top: 5px;
+    border-radius: 4px;
+    right: 15px;
+    width: 75px;
+}
+.btn-duyet-nhanh:disabled{
+    opacity: 0.7;
+}
+
+input[type=checkbox].css-checkbox {
+    position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+}
+
+input[type=checkbox].css-checkbox + label.css-label {
+    padding-left:30px;
+    height:25px; 
+    display:inline-block;
+    line-height:30px;
+    background-repeat:no-repeat;
+    background-position: 0 0;
+    font-size:18px;
+    color: #080808;
+    vertical-align:middle;
+    cursor:pointer;
+
+}
+
+input[type=checkbox].css-checkbox:checked + label.css-label {
+    background-position: 0 -25px;
+}
+label.css-label {
+background-image:url('../../../../assets/images/checkbox.png');
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+.css-label span{
+    display: inline-block;
+    margin-left: 5px;
+}
+.totalUnred{
+    display: inline-block;
+    position: relative;
+    background: #5188e8;
+    border-radius: 50%;
+    right: 12px;
+    font-size: 9px;
+    top: 3px;
+    color: #fff;
+    padding: 3px 6px;
+}
+.totalUnred.greater99{
+    padding: 5px 3px;
+}
+.totalUnred.greater10{
+    padding: 4px;
+}
+
+@media screen and (min-width: 768px){
+    .content-app-desktop{
+        width: 375px;
+        margin: 0px auto;
+    }
+    .content-app-desktop{
+        width: 375px;
+        margin: 0px auto;
+    }
+}

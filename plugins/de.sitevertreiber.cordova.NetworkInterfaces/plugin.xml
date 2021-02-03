@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="de.sitevertreiber.cordova.NetworkInterfaces" version="1.0.0">
+
+    <name>Network Interfaces</name>
+    <description>Network Interface Informations</description>
+    <author>Jonas Fischer</author>
+    <keywords></keywords>
+    <license></license>
+
+    <js-module src="www/network.js" name="network">
+        <clobbers target="network" />
+    </js-module>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="Network">
+                <param name="android-package" value="de.sitevertreiber.cordova.NetworkInterfaces.Network"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+        </config-file>
+
+        <source-file src="src/android/Network.java" target-dir="src/de/sitevertreiber/cordova/NetworkInterfaces/"/>
+    </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="Network">
+                <param name="ios-package" value="Network" onload="true" />
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/Network.h" />
+        <source-file src="src/ios/Network.m" />
+    </platform>
+
+</plugin>

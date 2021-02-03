@@ -1,0 +1,166 @@
+<ion-header>
+   <div class="content-app-desktop">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="app/main/home"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Chỉnh sửa chứng từ</ion-title>
+      <ion-buttons slot="end">
+        <ion-button color="dark" href="app/main/announcement">
+          <span class="fa fa-bell" style="font-size: 25px; color: #606060;"></span>
+          <span *ngIf="totalUnred > 0 && greaterThan(totalUnred,9)" class="totalUnred">{{totalUnred}}</span> 
+          <span *ngIf="totalUnred >= 10 && greaterThan(totalUnred,99)" class="totalUnred greater10">{{totalUnred}}</span> 
+          <span *ngIf="totalUnred > 99" class="totalUnred greater99">99+</span> 
+        </ion-button>        
+      </ion-buttons>
+    </ion-toolbar>
+   </div>
+  </ion-header>
+  
+  <ion-content padding>
+    <div class="content-app-desktop">
+      <ion-row>
+        <ion-col> 
+          <button [className]="tabActive == 1 ? 'tab-active tab-btn' : 'tab-inactive tab-btn'" (click)="chooseTab(1)" >
+            Buổi sáng
+          </button>
+          <button [className]="tabActive == 2 ? 'tab-active tab-btn' : 'tab-inactive tab-btn'" (click)="chooseTab(2)" >
+            Buổi chiều
+          </button>
+          <button [className]="tabActive == 3 ? 'tab-active tab-btn' : 'tab-inactive tab-btn'" (click)="chooseTab(3)" >
+            Trong ngày
+          </button>
+          <button [className]="tabActive == 4 ? 'tab-active tab-btn' : 'tab-inactive tab-btn'"  (click)="chooseTab(4)" >
+            Nhiều ngày
+          </button>
+        </ion-col>
+      </ion-row>
+       
+        <form #f="ngForm" (ngSubmit)="onCreateOrEdit(f)">
+          <div class="group-form">
+                <ion-row>
+                  <ion-col> 
+                    <p class="label-lydo">Chọn loại đăng ký: </p>
+                    <div class="type-filter" *ngIf="tabActive == 4; else otherDocumentType">
+                        <ion-select class="custom-options" interface="popover" [(ngModel)]="documentType" name="documentType">
+                          <ion-select-option value="NP">Đăng ký nghỉ phép</ion-select-option>
+                          <ion-select-option value="CT" class="brown-option">Đăng ký công tác</ion-select-option>
+                        </ion-select>
+                    </div>
+                    <ng-template #otherDocumentType>
+                      <div class="type-filter">
+                        <ion-select class="custom-options" interface="popover" [(ngModel)]="documentType" name="documentType">
+                          <ion-select-option value="NP">Đăng ký nghỉ phép</ion-select-option>
+                          <ion-select-option value="CT" class="brown-option">Đăng ký công tác</ion-select-option>
+                          <ion-select-option value="TC" class="brown-option">Đăng ký tăng ca</ion-select-option>
+                          <ion-select-option value="QCC" class="brown-option">Quên chấm công</ion-select-option>
+                        </ion-select>
+                    </div>
+                    </ng-template>
+                  </ion-col>
+                </ion-row>
+          </div>
+          <div class="group-form" *ngIf="documentType == 'NP'">
+            <ion-row>
+              <ion-col>
+                <p class="label-lydo">Loại nghỉ phép</p>
+                <div class="type-filter">
+                  <ion-select interface="popover" name="loaiNghiPhep" [(ngModel)]="loaiNghiPhep">
+                    <ion-select-option value="NGHIPHEPNAM">Nghỉ phép năm</ion-select-option>
+                    <ion-select-option value="KETHON">Nghỉ kết hôn</ion-select-option>
+                    <ion-select-option value="TANGCHE">Nghỉ tang chế</ion-select-option>
+                    <ion-select-option value="KHONGLUONG">Nghỉ không lương</ion-select-option>
+                    <ion-select-option value="THAISAN">Nghỉ thai sản</ion-select-option>
+                    <ion-select-option value="OMDAU">Nghỉ ốm đau, tai nạn</ion-select-option>
+                </ion-select>
+                </div>
+              </ion-col>
+            </ion-row>
+        </div>
+          <div class="group-form">
+              <ion-row>
+                <ion-col>
+                  <p class="label-lydo">Lý do: </p>
+              <ion-textarea maxlength="100" type="text" rows="3" ngModel name="lydo" [(ngModel)]="lydo"
+                style="border: 1px solid lightgray;border-radius: 10px;padding: 0 8px;" placeholder="Nhập lý do" required>
+              </ion-textarea>
+                </ion-col>
+              </ion-row>
+            </div>
+            <div class="group-form" *ngIf="documentType == 'QCC' || documentType == 'CT'">
+              <ion-row>
+                <ion-col>
+                  <p class="label-lydo">Hình ảnh chứng minh</p>
+                  <div *ngIf="images.length == 0 && oldAttachment.length > 0">
+                      <img src="{{globalUrlAPI + oldAttachment}}">
+                  </div>
+                  <div *ngIf="images.length === 0">
+                    <ion-button class="choose-img" size="small" fill="clear" color="lightgray" (click)="selectImage()">
+                      <ion-icon name="camera" slot="start"></ion-icon>
+                      Chọn ảnh
+                    </ion-button>
+                  </div>
+                  <ion-list>
+                    <ion-item *ngFor="let img of images; index as pos">
+                        <ion-thumbnail slot="start">
+                          <ion-img [src]="img.path"></ion-img>
+                        </ion-thumbnail>
+                        <ion-button slot="end" fill="clear" (click)="confirmDeleteImage(img, pos, true)">
+                          <ion-icon slot="icon-only" name="trash"></ion-icon>
+                        </ion-button>
+                    </ion-item>
+                  </ion-list>
+                </ion-col>
+              </ion-row>
+            </div>
+            <div class="group-form">
+              <ion-list>
+                <ion-row *ngIf="tabActive == 1 || tabActive == 2">
+                  <ion-col> 
+                    <ion-item style="--padding-start: 0px;--border-width:0px; border: 1px solid #d3d3d3; border-radius: 7px;">
+                      <ion-label style="padding-left: 16px;">Chọn ngày:</ion-label>
+                      <ion-datetime displayFormat="DD/MM/YYYY" min="2020" max="2099" [(ngModel)]="chonNgay" name="chonNgay" required></ion-datetime>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="tabActive == 3">
+                  <ion-col> 
+                    <ion-item style="--padding-start: 0px;--border-width:0px; border: 1px solid #d3d3d3; border-radius: 7px;">
+                      <ion-label style="padding-left: 16px;">Chọn ngày:</ion-label>
+                      <ion-datetime  displayFormat="DD/MM/YYYY" min="2020" max="2099" [(ngModel)]="chonNgay" name="chonNgay" (ionChange)="changeToGetTime($event)" required></ion-datetime>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col>
+                    <ion-item style="--padding-start: 0px;--border-width:0px; border: 1px solid #d3d3d3; border-radius: 7px;">
+                      <ion-label style="padding-left: 16px;">Giờ bắt đầu:</ion-label>
+                      <ion-datetime  displayFormat="HH:mm" [(ngModel)]="valueFirstTime" name="valueFirstTime" required></ion-datetime>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col>
+                    <ion-item style="--padding-start: 0px;--border-width:0px; border: 1px solid #d3d3d3; border-radius: 7px;">
+                      <ion-label style="padding-left: 16px;">Giờ kết thúc:</ion-label>
+                      <ion-datetime displayFormat="HH:mm" [(ngModel)]="valueLastTime" name="valueLastTime" required></ion-datetime>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="tabActive == 4">
+                  <ion-col> 
+                    <ion-item style="--padding-start: 0px;--border-width:0px; border: 1px solid #d3d3d3; border-radius: 7px;">
+                      <ion-label style="padding-left: 16px;">Từ ngày:</ion-label>
+                      <ion-datetime displayFormat="DD/MM/YYYY" min="2020" max="2099" [(ngModel)]="tuNgay" name="tuNgay"  required></ion-datetime>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col> <!-- label - position="stacked"-->
+                    <ion-item style="--padding-start: 0px;--border-width:0px; border: 1px solid #d3d3d3; border-radius: 7px;">
+                      <ion-label style="padding-left: 16px;">Đến ngày:</ion-label>
+                      <ion-datetime displayFormat="DD/MM/YYYY" min="2020" max="2099" [(ngModel)]="denNgay" name="denNgay"  required></ion-datetime>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-list>
+            </div>
+          <ion-button shape="round" color="primary" expand="block" type="submit" block [disabled]="!f.valid">Chỉnh sửa
+          </ion-button>
+        </form>
+    </div>
+  </ion-content>

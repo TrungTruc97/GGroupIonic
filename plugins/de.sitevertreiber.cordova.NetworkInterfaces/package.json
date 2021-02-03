@@ -1,0 +1,49 @@
+{
+  "_args": [
+    [
+      "cordova-network-interface@1.0.0",
+      "/Users/trucrocket/WorkSpace/ionic/GGroupInsightApp"
+    ]
+  ],
+  "_from": "cordova-network-interface@1.0.0",
+  "_id": "cordova-network-interface@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha1-HZ72uzFtjUdHe2wChNmfY7CYXsM=",
+  "_location": "/cordova-network-interface",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "cordova-network-interface@1.0.0",
+    "name": "cordova-network-interface",
+    "escapedName": "cordova-network-interface",
+    "rawSpec": "1.0.0",
+    "saveSpec": null,
+    "fetchSpec": "1.0.0"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-network-interface/-/cordova-network-interface-1.0.0.tgz",
+  "_spec": "1.0.0",
+  "_where": "/Users/trucrocket/WorkSpace/ionic/GGroupInsightApp",
+  "author": {
+    "name": "Jonas Fischer"
+  },
+  "cordova": {
+    "id": "cordova-network-interface",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "description": "This plugin allows your application to retrieve the local wifi address.",
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.1.0"
+    }
+  ],
+  "name": "cordova-network-interface",
+  "version": "1.0.0"
+}

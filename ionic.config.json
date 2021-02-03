@@ -1,0 +1,8 @@
+{
+  "name": "guardforce",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,90 @@
+<div class="heading-container">
+  <div id="dismiss-div" (click)="dismissPage()">x</div>
+  <div>
+    <p>Chọn ngày</p>
+    <span style="font-size: 12px;">
+      &nbsp;{{dateForm.value.dateFrom ? dateForm.value.dateFrom + ' đến ' + dateForm.value.dateTo : ''}}
+    </span>
+  </div>
+  <div id='border-bottom'></div>
+</div>
+<div class="grid-filter-btns" *ngIf="showFilterBtns">
+  <div (click)="selectToday()">
+      <span class="span-filter" [ngClass]="{'selected-filter': selectedButtonName==='Today'}">
+          Hôm nay
+      </span>
+  </div>
+
+  <div (click)="selectThisMonth()" style="text-align: center;">
+    <span class="span-filter" [ngClass]="{'selected-filter': selectedButtonName==='ThisMonth'}">
+        Tháng này
+    </span>
+</div>
+
+  <div (click)="selectLastSevenDays()" style="text-align: right;">
+      <span class="span-filter" [ngClass]="{'selected-filter': selectedButtonName==='LastSevenDays'}">
+          7 ngày cuối
+      </span>
+  </div>
+
+  <div (click)="selectYesterday()">
+      <span class="span-filter" [ngClass]="{'selected-filter': selectedButtonName==='Yesterday'}">
+          Hôm qua
+      </span>
+  </div>
+
+  <div (click)="selectLastMonth()" style="text-align: center;">
+    <span class="span-filter" [ngClass]="{'selected-filter': selectedButtonName==='LastMonth'}">
+        Tháng trước
+    </span>
+</div>
+
+  <div (click)="selectLastThirtyDays()" style="text-align: right;">
+      <span class="span-filter" [ngClass]="{'selected-filter': selectedButtonName==='LastThirtyDays'}">
+          30 ngày cuối
+      </span>
+  </div>
+
+
+
+</div>
+  
+<div class="day-of-week sizeOf-div" style="background: #fbfcfc; color: #a6aaaf;">
+  <div>CN</div>
+  <div>T2</div>
+  <div>T3</div>
+  <div>T4</div>
+  <div>T5</div>
+  <div>T6</div>
+  <div>T7</div>
+</div>
+
+<ion-content #scrollMe>
+  <ng-container *ngFor="let month of calendar">
+    <p class="heading-month-year">
+      <span style="text-transform: capitalize;">{{month.monthName ? month.monthName + ', '+ month.year : ''}}</span>
+    </p>
+    <div class="date-grid">
+      <div *ngFor="let day of month.dates" class="sizeOf-div span-day" 
+           [ngClass]="{
+             'selection-start': isSelectionStart(day) ,
+             'selection-end': isSelectionEnd(day)  ,
+             'in-range': isInRange(day) ,
+             'same-date':isStartAndEndDateSame()
+            }" 
+            id="dateRef" 
+            (click)="subject$.next({date:day,event:$event})">
+        {{day?.date()}}
+      </div>
+    </div>
+  </ng-container>
+  <div class="sizeOf-div"></div>
+</ion-content>
+<ion-footer>
+  <ion-button style="--background:#3880ff;margin:0px" 
+              expand="full" 
+              (click)="applyDates()"
+              [disabled]="restrictSelectionTo && !isSelectionInRestrictedRange()">
+    Chọn
+  </ion-button>
+</ion-footer>

@@ -13,7 +13,7 @@
                                resultWithStatus:CDVCommandStatus_OK
                                messageAsString:msg];
 
-    [self success:result callbackId:callbackId];
+//    [self success:result callbackId:callbackId];
 }
 
 @end

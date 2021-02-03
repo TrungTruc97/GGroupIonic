@@ -72399,7 +72399,7 @@ var ServiceProxyModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/trucrocket/WorkSpace/ionic/GGroupInsightApp/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/trucrocket/WorkSpace/GitIonicTest/src/main.ts */"./src/main.ts");
 
 
 /***/ })

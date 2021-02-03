@@ -1,5 +1,31 @@
 {
-    "declarations": {},
-    "sources": {},
-    "libraries": {}
+    "declarations": {
+        "use_frameworks!": {
+            "declaration": "use_frameworks!",
+            "count": 3
+        }
+    },
+    "sources": {
+        "https://github.com/CocoaPods/Specs.git": {
+            "source": "https://github.com/CocoaPods/Specs.git",
+            "count": 3
+        }
+    },
+    "libraries": {
+        "AppCenter": {
+            "name": "AppCenter",
+            "spec": "~> 2.5.0",
+            "count": 4
+        },
+        "AppCenter/Analytics": {
+            "name": "AppCenter/Analytics",
+            "spec": "~> 2.5.0",
+            "count": 1
+        },
+        "AppCenter/Crashes": {
+            "name": "AppCenter/Crashes",
+            "spec": "~> 2.5.0",
+            "count": 1
+        }
+    }
 }

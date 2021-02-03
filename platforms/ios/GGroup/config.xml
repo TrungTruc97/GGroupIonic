@@ -82,6 +82,18 @@
     <feature name="Network">
         <param name="ios-package" onload="true" value="Network" />
     </feature>
+    <feature name="AppCenterShared">
+        <param name="ios-package" value="AppCenterSharedPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="AppCenterAnalytics">
+        <param name="ios-package" value="AppCenterAnalyticsPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="AppCenterCrashes">
+        <param name="ios-package" value="AppCenterCrashesPlugin" />
+        <param name="onload" value="true" />
+    </feature>
     <name>GGroup</name>
     <description>App chấm công dành cho thành viên GGroup.</description>
     <author email="admin@ggroup.vn" href="http://ggroup.vn/">Ionic beginner</author>
@@ -172,4 +184,5 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+    <preference name="APP_SECRET" value="fbe7629d-7a59-4d09-ab1b-9144e55e6a4f" />
 </widget>

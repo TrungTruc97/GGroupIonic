@@ -162,5 +162,29 @@
     },
     "is_top_level": false,
     "variables": {}
+  },
+  "cordova-plugin-appcenter-analytics": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-appcenter-analytics@^0.5.1"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-appcenter-shared": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-appcenter-shared@0.5.1"
+    },
+    "is_top_level": false,
+    "variables": {}
+  },
+  "cordova-plugin-appcenter-crashes": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-appcenter-crashes@^0.5.1"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

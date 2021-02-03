@@ -5479,7 +5479,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/trucrocket/WorkSpace/ionic/GGroupInsightApp/src/polyfills.ts */"./src/polyfills.ts");
+module.exports = __webpack_require__(/*! /Users/trucrocket/WorkSpace/GitIonicTest/src/polyfills.ts */"./src/polyfills.ts");
 
 
 /***/ })

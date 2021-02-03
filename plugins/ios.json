@@ -57,6 +57,12 @@
     },
     "de.sitevertreiber.cordova.NetworkInterfaces": {
       "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-plugin-appcenter-analytics": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-plugin-appcenter-crashes": {
+      "PACKAGE_NAME": "chamcong.ggroup"
     }
   },
   "dependent_plugins": {
@@ -67,6 +73,9 @@
       "PACKAGE_NAME": "chamcong.ggroup"
     },
     "cordova-plugin-compat": {
+      "PACKAGE_NAME": "chamcong.ggroup"
+    },
+    "cordova-plugin-appcenter-shared": {
       "PACKAGE_NAME": "chamcong.ggroup"
     }
   }
